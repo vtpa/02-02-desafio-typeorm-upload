@@ -17,9 +17,9 @@ class TransactionsRepository extends Repository<Transaction> {
     // console.log(transactions);
     transactions.forEach(transaction => {
       if (transaction.type === 'income') {
-        income += transaction.value;
+        income += Number(transaction.value);
       } else {
-        outcome += transaction.value;
+        outcome += Number(transaction.value);
       }
     });
     const balance = {

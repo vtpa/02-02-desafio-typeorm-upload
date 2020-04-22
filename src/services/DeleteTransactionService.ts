@@ -7,13 +7,14 @@ import TransactionsRepository from '../repositories/TransactionsRepository';
 class DeleteTransactionService {
   public async execute(id: string): Promise<void> {
     const transactionsRepository = getCustomRepository(TransactionsRepository);
-    const checkTransactionExists = transactionsRepository.findOne(id);
 
-    if (!checkTransactionExists) {
-      throw new AppError('Transaction not exists.');
+    const transaction = await transactionsRepository.findOne(id);
+
+    if (!transaction) {
+      throw new AppError('Transaction does not exist.');
     }
 
-    await transactionsRepository.delete(id);
+    await transactionsRepository.remove(transaction);
   }
 }
 
